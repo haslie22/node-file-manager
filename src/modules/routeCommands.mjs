@@ -1,6 +1,11 @@
 import exit from './exit.mjs';
+import cd from './nwd/cd.mjs';
+import up from './nwd/up.mjs';
 
 import commands from '../utils/constants/commands.mjs';
+import errors from '../utils/constants/errors.mjs';
+
+import CustomError from '../utils/CustomError.mjs';
 
 const routeCommands = async (line) => {
   const [command, ...args] = line.trim().split(' ');
@@ -9,9 +14,14 @@ const routeCommands = async (line) => {
     case commands.EXIT:
       exit();
       break;
+    case commands.CD:
+      cd(args);
+      break;
+    case commands.UP:
+      up(args);
+      break;
     default:
-      // TODO: implement function for error handling
-      console.error('Invalid input');
+      new CustomError(errors.INVALID_INPUT).displayErrorMessage();
   }
 };
 
