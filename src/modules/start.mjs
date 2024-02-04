@@ -1,9 +1,8 @@
 import { createInterface } from 'readline';
 
 import greetUser from './greetUser.mjs';
-import getHomedir from '../utils/helpers/getHomedir.mjs';
-import setCurrentPath from '../utils/helpers/setCurrentPath.mjs';
-import showCurrentPath from '../utils/helpers/showCurrentPath.mjs';
+import goodbyeUser from './goodbyeUser.mjs';
+import routeCommands from './routeCommands.mjs';
 
 const start = () => {
   const rl = createInterface({
@@ -11,10 +10,10 @@ const start = () => {
     output: process.stdout,
   });
 
-  greetUser();
+  rl.on('close', goodbyeUser);
+  rl.on('line', async (input) => await routeCommands(input));
 
-  setCurrentPath(getHomedir());
-  showCurrentPath();
+  greetUser();
 };
 
 export default start;
