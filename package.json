@@ -1,0 +1,15 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "Rolling Scopes School NodeJS 2024Q1 assignment solution",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "Lizaveta Dondysh <lizadondysh@icloud.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haslie22/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/haslie22/node-file-manager#readme"
+}
