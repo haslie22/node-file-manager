@@ -1,3 +1,9 @@
 const UNKNOWN_USERNAME = 'incognito 😎';
 
-export { UNKNOWN_USERNAME };
+const itemType = {
+  DIR: 'directory',
+  FILE: 'file',
+  SYMLINK: 'symbolic link',
+};
+
+export { UNKNOWN_USERNAME, itemType };
