@@ -12,6 +12,7 @@ const getMessage = (type, textToEmbed) => {
     FILE_MOVED: `File ${textToEmbed} successfully moved`,
     FILE_COMPRESSED: `File ${textToEmbed} successfully compressed`,
     FILE_DECOMPRESSED: `File ${textToEmbed} successfully decompressed`,
+    HASH: `Hash for file: ${textToEmbed}`,
   };
 
   return messageTypes[type] || '';
