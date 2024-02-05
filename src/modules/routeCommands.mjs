@@ -8,6 +8,7 @@ import rn from './fs/rn.mjs';
 import cp from './fs/cp.mjs';
 import rm from './fs/rm.mjs';
 import mv from './fs/mv.mjs';
+import compress from './crypto/compress.mjs';
 
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
@@ -48,6 +49,9 @@ const routeCommands = async (line) => {
       break;
     case commands.MV:
       await mv(args);
+      break;
+    case commands.COMPRESS:
+      await compress(args);
       break;
     default:
       new CustomError(errors.INVALID_INPUT).displayErrorMessage();

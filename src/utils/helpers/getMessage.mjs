@@ -10,6 +10,7 @@ const getMessage = (type, textToEmbed) => {
     FILE_COPIED: `File ${textToEmbed} successfully copied`,
     FILE_DELETED: `File ${textToEmbed} successfully deleted`,
     FILE_MOVED: `File ${textToEmbed} successfully moved`,
+    FILE_COMPRESSED: `File ${textToEmbed} successfully compressed`,
   };
 
   return messageTypes[type] || '';
