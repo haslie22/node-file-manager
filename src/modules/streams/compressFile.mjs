@@ -5,6 +5,7 @@ import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 import writeFile from './writeFile.mjs';
 
 const compressFile = async (sourceFilePath, destinationFilePath, onEnd) => {
+  console.log('🚀 ~ compressFile ~ sourceFilePath:', sourceFilePath);
   const onData = (writeStream) => {
     const compressStream = createBrotliCompress();
     const readStream = readFile(
