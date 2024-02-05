@@ -7,6 +7,7 @@ const getMessage = (type, textToEmbed) => {
     HOMEDIR: `Your home directory is ${textToEmbed}`,
     FILE_CREATED: `File ${textToEmbed} successfully created`,
     FILE_RENAMED: `File ${textToEmbed} successfully renamed`,
+    FILE_COPIED: `File ${textToEmbed} successfully copied`,
   };
 
   return messageTypes[type] || '';
