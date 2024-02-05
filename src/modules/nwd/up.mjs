@@ -9,7 +9,7 @@ import CustomError from '../../utils/CustomError.mjs';
 import errors from '../../utils/constants/errors.mjs';
 
 const up = (args) => {
-  if (args.length) new CustomError(errors.EXCESSIVE_PARAMS).displayErrorMessage();
+  if (args.length) new CustomError(errors.UNEXPECTED_PARAMS).displayErrorMessage();
 
   const currentPath = getCurrentPath();
   const parentDir = dirname(currentPath);

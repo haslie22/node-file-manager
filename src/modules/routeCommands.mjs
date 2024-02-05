@@ -2,6 +2,7 @@ import exit from './exit.mjs';
 import cd from './nwd/cd.mjs';
 import up from './nwd/up.mjs';
 import ls from './nwd/ls.mjs';
+import cat from './fs/cat.mjs';
 
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
@@ -9,7 +10,8 @@ import errors from '../utils/constants/errors.mjs';
 import CustomError from '../utils/CustomError.mjs';
 
 const routeCommands = async (line) => {
-  const [command, ...args] = line.trim().split(' ');
+  const args = line.match(/(['"]).*?\1|\S+/g) || [];
+  const command = args.shift();
 
   switch (command) {
     case commands.EXIT:
@@ -23,6 +25,9 @@ const routeCommands = async (line) => {
       break;
     case commands.LS:
       ls(args);
+      break;
+    case commands.CAT:
+      cat(args);
       break;
     default:
       new CustomError(errors.INVALID_INPUT).displayErrorMessage();

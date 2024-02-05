@@ -11,8 +11,11 @@ import errors from '../../utils/constants/errors.mjs';
 import { itemType } from '../../utils/constants/names.mjs';
 
 const ls = async (args) => {
+  let hasErrors = false;
+
   if (args.length) {
-    return new CustomError(errors.UNEXPECTED_PARAMS).displayErrorMessage();
+    hasErrors = true;
+    new CustomError(errors.UNEXPECTED_PARAMS).displayErrorMessage();
   }
 
   const currentPath = getCurrentPath();
@@ -21,8 +24,6 @@ const ls = async (args) => {
   const files = [];
   const dirs = [];
   const symlinks = [];
-
-  let hasErrors = false;
 
   await Promise.all(
     contents.map(async (item) => {
