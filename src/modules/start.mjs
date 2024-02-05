@@ -1,7 +1,7 @@
 import { createInterface } from 'readline';
 
-import greetUser from './greetUser.mjs';
-import goodbyeUser from './goodbyeUser.mjs';
+import greetUser from '../utils/helpers/greetUser.mjs';
+import goodbyeUser from '../utils/helpers/goodbyeUser.mjs';
 import routeCommands from './routeCommands.mjs';
 
 const start = () => {

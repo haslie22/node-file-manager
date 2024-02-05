@@ -1,4 +1,4 @@
-import goodbyeUser from './goodbyeUser.mjs';
+import goodbyeUser from '../utils/helpers/goodbyeUser.mjs';
 
 const exit = () => {
   goodbyeUser();

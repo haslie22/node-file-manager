@@ -9,6 +9,7 @@ const getMessage = (type, textToEmbed) => {
     FILE_RENAMED: `File ${textToEmbed} successfully renamed`,
     FILE_COPIED: `File ${textToEmbed} successfully copied`,
     FILE_DELETED: `File ${textToEmbed} successfully deleted`,
+    FILE_MOVED: `File ${textToEmbed} successfully moved`,
   };
 
   return messageTypes[type] || '';
