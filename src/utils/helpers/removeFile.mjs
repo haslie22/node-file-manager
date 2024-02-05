@@ -6,7 +6,7 @@ const removeFile = async (absolutePath) => {
   try {
     await rm(absolutePath);
   } catch (error) {
-    throwOperationFailed(error.message);
+    return throwOperationFailed(error.message);
   }
 };
 

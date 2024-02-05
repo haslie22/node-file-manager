@@ -5,7 +5,6 @@ const doesFileExist = async (filePath) => {
     await access(filePath, constants.F_OK);
     return true;
   } catch {
-    console.log('from doesFileExist');
     return false;
   }
 };

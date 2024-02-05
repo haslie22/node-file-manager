@@ -5,6 +5,7 @@ import getMessage from '../../utils/helpers/getMessage.mjs';
 import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
 import removeFile from '../../utils/helpers/removeFile.mjs';
+import processPathValidity from '../../utils/helpers/processPathValidity.mjs';
 
 import colors from '../../utils/constants/colors.mjs';
 import errors from '../../utils/constants/errors.mjs';
@@ -12,6 +13,9 @@ import errors from '../../utils/constants/errors.mjs';
 const rm = async (targetFilePath) => {
   const absolutePath = processParams(targetFilePath);
   const fileExists = await doesFileExist(absolutePath);
+  const isPathValid = processPathValidity([absolutePath]);
+
+  if (!isPathValid) return;
 
   if (fileExists) {
     await removeFile(absolutePath);

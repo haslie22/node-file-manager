@@ -4,14 +4,14 @@ import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 
 const cd = (targetDirPath) => {
   const absolutePath = processParams(targetDirPath);
+  if (!absolutePath) return;
 
   try {
     process.chdir(absolutePath);
+    showCurrentPath();
   } catch (error) {
-    throwOperationFailed(error.message);
+    return throwOperationFailed(error.message);
   }
-
-  showCurrentPath();
 };
 
 export default cd;

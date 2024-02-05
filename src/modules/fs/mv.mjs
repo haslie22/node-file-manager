@@ -7,6 +7,7 @@ import writeText from '../../utils/helpers/writeText.mjs';
 import getMessage from '../../utils/helpers/getMessage.mjs';
 import copyFile from '../../utils/helpers/copyFile.mjs';
 import removeFile from '../../utils/helpers/removeFile.mjs';
+import processPathValidity from '../../utils/helpers/processPathValidity.mjs';
 
 import errors from '../../utils/constants/errors.mjs';
 import colors from '../../utils/constants/colors.mjs';
@@ -14,6 +15,9 @@ import colors from '../../utils/constants/colors.mjs';
 const mv = async (filePaths) => {
   const sourceFilePath = processParams(filePaths[0]);
   const targetDirPath = processParams(filePaths[1]);
+  const arePathsValid = processPathValidity([sourceFilePath, targetDirPath]);
+
+  if (!arePathsValid) return;
 
   const fileExists = await doesFileExist(sourceFilePath);
   const folderExists = await doesFileExist(targetDirPath);

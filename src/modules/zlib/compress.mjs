@@ -1,5 +1,5 @@
-import { dirname } from 'path';
 import { lstat } from 'fs/promises';
+import { resolve } from 'path';
 
 import processParams from '../../utils/helpers/processParams.mjs';
 import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
@@ -9,8 +9,7 @@ import getMessage from '../../utils/helpers/getMessage.mjs';
 import doesFileExist from '../../utils/helpers/doesFileExist.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
 import generateCompressedFilename from '../../utils/helpers/generateCompressedFilename.mjs';
-
-import CustomError from '../../utils/CustomError.mjs';
+import processPathValidity from '../../utils/helpers/processPathValidity.mjs';
 
 import colors from '../../utils/constants/colors.mjs';
 import errors from '../../utils/constants/errors.mjs';
@@ -18,17 +17,21 @@ import errors from '../../utils/constants/errors.mjs';
 const compress = async (filePaths) => {
   const sourceFilePath = processParams(filePaths[0]);
   const targetFilePath = processParams(filePaths[1]);
-  const compressedFilename = generateCompressedFilename(sourceFilePath);
+  const arePathsValid = processPathValidity([sourceFilePath, targetFilePath]);
 
+  if (!arePathsValid) return;
+
+  const compressedFileName = generateCompressedFilename(sourceFilePath);
   const isDir = await lstat(targetFilePath).then(
     (stats) => stats.isDirectory(),
     () => false
   );
-  const compressedFilePath = isDir ? compressedFilename : targetFilePath;
+
+  const compressedFilePath = isDir ? resolve(targetFilePath, compressedFileName) : targetFilePath;
   const fileExists = await doesFileExist(compressedFilePath);
 
   const onEnd = () => {
-    writeText(getMessage('FILE_COMPRESSED', sourceFilePath, compressedFilePath), colors.GREEN);
+    writeText(getMessage('FILE_COMPRESSED', sourceFilePath), colors.GREEN);
     showCurrentPath();
   };
 
@@ -39,7 +42,7 @@ const compress = async (filePaths) => {
       return throwOperationFailed(error.message);
     }
   } else {
-    new CustomError(errors.FILE_EXISTS).displayErrorMessage();
+    return throwOperationFailed(errors.FILE_EXISTS);
   }
 };
 

@@ -16,7 +16,7 @@ import getSystemInfo from './os/getSystemInfo.mjs';
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
 
-import CustomError from '../utils/CustomError.mjs';
+import throwOperationFailed from '../utils/helpers/throwOperationFailed.mjs';
 
 const routeCommands = async (line) => {
   const args = line.match(/(['"]).*?\1|\S+/g) || [];
@@ -66,7 +66,7 @@ const routeCommands = async (line) => {
       getSystemInfo(args);
       break;
     default:
-      new CustomError(errors.INVALID_INPUT).displayErrorMessage();
+      throwOperationFailed(errors.INVALID_INPUT);
   }
 };
 

@@ -7,6 +7,7 @@ import writeText from '../../utils/helpers/writeText.mjs';
 import getMessage from '../../utils/helpers/getMessage.mjs';
 import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
+import processPathValidity from '../../utils/helpers/processPathValidity.mjs';
 
 import colors from '../../utils/constants/colors.mjs';
 import errors from '../../utils/constants/errors.mjs';
@@ -14,6 +15,9 @@ import errors from '../../utils/constants/errors.mjs';
 const hash = async (sourceFilePath) => {
   const targetFilePath = processParams(sourceFilePath[0]);
   const fileExists = await doesFileExist(targetFilePath);
+  const isPathValid = processPathValidity([targetFilePath]);
+
+  if (!isPathValid) return;
 
   if (fileExists) {
     const hashAlgorithm = 'sha256';
@@ -30,12 +34,12 @@ const hash = async (sourceFilePath) => {
     };
 
     const onError = (error) => {
-      throwOperationFailed(error.message);
+      return throwOperationFailed(error.message);
     };
 
     readFile(targetFilePath, onData, onEnd, onError);
   } else {
-    throwOperationFailed(errors.FILE_NOT_FOUND);
+    return throwOperationFailed(errors.FILE_NOT_FOUND);
   }
 };
 

@@ -1,15 +1,17 @@
-import { resolve, dirname } from 'path';
+import { dirname } from 'path';
 
 import getCurrentPath from '../../utils/helpers/getCurrentPath.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
 import isSameDrive from '../../utils/helpers/isSameDrive.mjs';
 
-import CustomError from '../../utils/CustomError.mjs';
+import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 
 import errors from '../../utils/constants/errors.mjs';
 
 const up = (args) => {
-  if (args.length) new CustomError(errors.UNEXPECTED_PARAMS).displayErrorMessage();
+  if (args.length) {
+    return throwOperationFailed(errors.UNEXPECTED_PARAMS);
+  }
 
   const currentPath = getCurrentPath();
   const parentDir = dirname(currentPath);
@@ -19,13 +21,13 @@ const up = (args) => {
       try {
         process.chdir(parentDir);
       } catch (error) {
-        new CustomError(error.message).displayErrorMessage();
+        return throwOperationFailed(error.message);
       }
     } else {
-      new CustomError(errors.ROOT_DIR.displayErrorMessage());
+      return throwOperationFailed(errors.ROOT_DIR);
     }
   } else {
-    new CustomError(errors.ROOT_DIR).displayErrorMessage();
+    return throwOperationFailed(errors.ROOT_DIR);
   }
 
   showCurrentPath();

@@ -11,7 +11,6 @@ const goodbyeUser = () => {
   const username = getArgumentValue('username') || UNKNOWN_USERNAME;
 
   writeText(getMessage('GOODBYE', username), colors.BLUE);
-  showCurrentPath();
 };
 
 export default goodbyeUser;

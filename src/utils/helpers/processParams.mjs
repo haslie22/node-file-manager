@@ -2,14 +2,13 @@ import { resolve } from 'path';
 
 import getCurrentPath from './getCurrentPath.mjs';
 import trimQuotes from './trimQuotes.mjs';
-
-import CustomError from '../CustomError.mjs';
+import throwOperationFailed from './throwOperationFailed.mjs';
 
 import errors from '../constants/errors.mjs';
 
 const processParams = (unprocessedPath) => {
   if (!unprocessedPath || !unprocessedPath.length) {
-    return new CustomError(errors.MISSING_PARAMS).displayErrorMessage();
+    return null;
   }
 
   if (unprocessedPath.length === 1) {

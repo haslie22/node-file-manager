@@ -16,7 +16,7 @@ const getSystemInfo = (params) => {
     routeArgs[normalizedCommand]();
     showCurrentPath();
   } else {
-    throwOperationFailed(errors.UNEXPECTED_PARAMS);
+    return throwOperationFailed(errors.UNEXPECTED_PARAMS);
   }
 };
 

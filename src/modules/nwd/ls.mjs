@@ -1,11 +1,10 @@
-import { readdir, lstat, readlink } from 'fs/promises';
+import { readdir, lstat } from 'fs/promises';
 import { join } from 'path';
 
 import sortAlphabetically from '../../utils/helpers/sortAlphabetically.mjs';
 import getCurrentPath from '../../utils/helpers/getCurrentPath.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
-
-import CustomError from '../../utils/CustomError.mjs';
+import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 
 import errors from '../../utils/constants/errors.mjs';
 import { itemType } from '../../utils/constants/names.mjs';
@@ -15,7 +14,7 @@ const ls = async (args) => {
 
   if (args.length) {
     hasErrors = true;
-    new CustomError(errors.UNEXPECTED_PARAMS).displayErrorMessage();
+    return throwOperationFailed(errors.UNEXPECTED_PARAMS);
   }
 
   const currentPath = getCurrentPath();
@@ -40,7 +39,7 @@ const ls = async (args) => {
     })
   ).catch((error) => {
     hasErrors = true;
-    new CustomError(error.message).displayErrorMessage();
+    return throwOperationFailed(error.message);
   });
 
   const sortedDirs = sortAlphabetically(dirs, 'name');

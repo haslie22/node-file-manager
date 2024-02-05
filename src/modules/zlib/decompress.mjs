@@ -5,8 +5,7 @@ import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
 import getMessage from '../../utils/helpers/getMessage.mjs';
 import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 import decompressFile from '../streams/decompressFile.mjs';
-
-import CustomError from '../../utils/CustomError.mjs';
+import processPathValidity from '../../utils/helpers/processPathValidity.mjs';
 
 import colors from '../../utils/constants/colors.mjs';
 import errors from '../../utils/constants/errors.mjs';
@@ -15,6 +14,9 @@ const decompress = async (filePaths) => {
   const sourceFilePath = processParams(filePaths[0]);
   const targetFilePath = processParams(filePaths[1]);
   const fileExists = await doesFileExist(targetFilePath);
+  const arePathsValid = processPathValidity([sourceFilePath, targetFilePath]);
+
+  if (!arePathsValid) return;
 
   const onEnd = () => {
     writeText(getMessage('FILE_DECOMPRESSED', sourceFilePath, targetFilePath), colors.GREEN);
@@ -28,7 +30,7 @@ const decompress = async (filePaths) => {
       return throwOperationFailed(error.message);
     }
   } else {
-    new CustomError(errors.FILE_EXISTS).displayErrorMessage();
+    return throwOperationFailed(errors.FILE_EXISTS);
   }
 };
 
