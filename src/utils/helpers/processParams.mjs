@@ -8,7 +8,6 @@ import CustomError from '../CustomError.mjs';
 import errors from '../constants/errors.mjs';
 
 const processParams = (unprocessedPath) => {
-  console.log('🚀 ~ processParams ~ unprocessedPath:', unprocessedPath);
   if (unprocessedPath.length === 1) {
     return resolve(getCurrentPath(), trimQuotes(unprocessedPath[0]));
   } else if (unprocessedPath.length > 1) {

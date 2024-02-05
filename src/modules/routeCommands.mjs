@@ -6,6 +6,7 @@ import cat from './fs/cat.mjs';
 import add from './fs/add.mjs';
 import rn from './fs/rn.mjs';
 import cp from './fs/cp.mjs';
+import rm from './fs/rm.mjs';
 
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
@@ -40,6 +41,9 @@ const routeCommands = async (line) => {
       break;
     case commands.CP:
       await cp(args);
+      break;
+    case commands.RM:
+      await rm(args);
       break;
     default:
       new CustomError(errors.INVALID_INPUT).displayErrorMessage();
