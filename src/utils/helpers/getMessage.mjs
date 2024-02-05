@@ -6,6 +6,7 @@ const getMessage = (type, textToEmbed) => {
     START_HINT: 'To exit, press "Ctrl + C" or type ".exit" on a new line and press Enter',
     HOMEDIR: `Your home directory is ${textToEmbed}`,
     FILE_CREATED: `File ${textToEmbed} successfully created`,
+    FILE_RENAMED: `File ${textToEmbed} successfully renamed`,
   };
 
   return messageTypes[type] || '';
