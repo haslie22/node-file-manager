@@ -13,6 +13,9 @@ const getMessage = (type, textToEmbed) => {
     FILE_COMPRESSED: `File ${textToEmbed} successfully compressed`,
     FILE_DECOMPRESSED: `File ${textToEmbed} successfully decompressed`,
     HASH: `Hash for file: ${textToEmbed}`,
+    EOL: `Default system End-Of-Line: ${textToEmbed}`,
+    USERNAME: `Current system username: ${textToEmbed}`,
+    ARCHITECTURE: `GPU architecture: ${textToEmbed}`,
   };
 
   return messageTypes[type] || '';

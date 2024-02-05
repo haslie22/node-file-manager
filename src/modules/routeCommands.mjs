@@ -11,6 +11,7 @@ import mv from './fs/mv.mjs';
 import compress from './zlib/compress.mjs';
 import decompress from './zlib/decompress.mjs';
 import hash from './hash/hash.mjs';
+import getSystemInfo from './os/getSystemInfo.mjs';
 
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
@@ -60,6 +61,9 @@ const routeCommands = async (line) => {
       break;
     case commands.HASH:
       await hash(args);
+      break;
+    case commands.OS:
+      getSystemInfo(args);
       break;
     default:
       new CustomError(errors.INVALID_INPUT).displayErrorMessage();
