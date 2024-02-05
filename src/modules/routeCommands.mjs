@@ -3,6 +3,7 @@ import cd from './nwd/cd.mjs';
 import up from './nwd/up.mjs';
 import ls from './nwd/ls.mjs';
 import cat from './fs/cat.mjs';
+import add from './fs/add.mjs';
 
 import commands from '../utils/constants/commands.mjs';
 import errors from '../utils/constants/errors.mjs';
@@ -28,6 +29,9 @@ const routeCommands = async (line) => {
       break;
     case commands.CAT:
       cat(args);
+      break;
+    case commands.ADD:
+      add(args);
       break;
     default:
       new CustomError(errors.INVALID_INPUT).displayErrorMessage();

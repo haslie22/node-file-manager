@@ -7,7 +7,7 @@ import isValidString from '../typeguards/isValidString.mjs';
 const writeText = (text, color = colors.DEFAULT) => {
   if (!isValidString(text)) return;
 
-  const coloredText = `${color}${text}${colors.DEFAULT}${EOL}${EOL}`;
+  const coloredText = `${EOL}${color}${text}${colors.DEFAULT}${EOL}`;
   process.stdout.write(coloredText);
 };
 

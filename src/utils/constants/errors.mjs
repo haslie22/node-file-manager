@@ -7,6 +7,7 @@ const errors = {
   EXCESSIVE_PARAMS: 'Too many parameters provided',
   MISSING_PARAMS: 'Command should be run with parameters',
   ROOT_DIR: 'Already in the root directory',
+  FILE_EXISTS: 'File with this name already exists',
 };
 
 export default errors;

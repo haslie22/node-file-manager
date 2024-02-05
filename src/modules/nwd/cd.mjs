@@ -3,7 +3,7 @@ import processParams from '../../utils/helpers/processParams.mjs';
 import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 
 const cd = (targetDirPath) => {
-  let absolutePath = processParams(targetDirPath);
+  const absolutePath = processParams(targetDirPath);
 
   try {
     process.chdir(absolutePath);

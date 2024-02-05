@@ -1,8 +1,10 @@
+import { EOL } from 'os';
+
 import CustomError from '../CustomError.mjs';
 import errors from '../constants/errors.mjs';
 
 const throwOperationFailed = (message) => {
-  return new CustomError(`${errors.OPERATION_FAILED}\n${message}`).displayErrorMessage();
+  return new CustomError(`${errors.OPERATION_FAILED}\n${message}${EOL}`).displayErrorMessage();
 };
 
 export default throwOperationFailed;

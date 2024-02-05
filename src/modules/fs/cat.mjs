@@ -6,7 +6,7 @@ import readFile from '../streams/readFile.mjs';
 import processParams from '../../utils/helpers/processParams.mjs';
 
 const cat = (targetFilePath) => {
-  let absolutePath = processParams(targetFilePath);
+  const absolutePath = processParams(targetFilePath);
 
   const onData = (chunk) => process.stdout.write(`${EOL}${chunk.toString()}`);
   const onEnd = () => {
