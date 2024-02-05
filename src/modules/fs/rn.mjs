@@ -8,6 +8,7 @@ import throwOperationFailed from '../../utils/helpers/throwOperationFailed.mjs';
 import showCurrentPath from '../../utils/helpers/showCurrentPath.mjs';
 
 import colors from '../../utils/constants/colors.mjs';
+import errors from '../../utils/constants/errors.mjs';
 
 const rn = async (filePaths) => {
   const oldFilePath = processParams(filePaths[0]);
@@ -27,7 +28,7 @@ const rn = async (filePaths) => {
 
     showCurrentPath();
   } else {
-    return throwOperationFailed(`File not found: ${oldFilePath}`);
+    return throwOperationFailed(errors.FILE_NOT_FOUND);
   }
 };
 
